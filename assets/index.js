@@ -11,17 +11,25 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 */
-var CityName = ''
-var APIKey = '214f0628b63be875d9fcdd939008692a'
-var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=${CityName}&appid=14f0628b63be875d9fcdd939008692a;
+var CityName = "";
+var APIKey = "1c8e99a8b00221d888bd9d8829968388";
+var requestUrl =
+  "https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial";
+var searchButton = document.getElementById("search-button");
 
-
-fetch(requestUrl)
-.then(function (response) {
-  return response.json();
-})
-.then(function (data) {
-  console.log('Fetch Response \n-------------');
-  console.log(data);
-});
-
+searchCity = function () {
+  var searchText = document.getElementById("user-input");
+  var cityName = searchText.value;
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log("Fetch Response \n-------------");
+      console.log(data);
+      alert(data.main.temp);
+      // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
+    });
+};
+searchButton.addEventListener("click", searchCity);
