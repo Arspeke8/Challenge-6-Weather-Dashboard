@@ -42,9 +42,44 @@ searchCity = function () {
       document.getElementById("T-1").innerText =
         "Temp:" + data.main.temp + " " + "F°";
       //document.getElementById("W-1").innerText = "Wind:" + data.main;
+      document.getElementById("W-1").innerText =
+        "Wind:" + data.wind.speed + "MPH";
       document.getElementById("H-1").innerText =
         "Humidity:" + data.main.humidity + "%";
-      // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
+      console.log(data.coord.lat);
+      console.log(data.coord.lon);
     });
 };
+const lat = data.coord.lat;
+const lon = data.coord.lon;
+console.log(lat);
+console.log(lon);
+const requestUrlfive = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+console.log(requestUrlfive);
+
+fetch(requestUrlfive)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log("Fetch Response \n-------------");
+    console.log(data);
+
+    // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
+  });
+
+/*function fiveCity() {
+  var fiveText = document.getElementById("user-input");
+  var fiveCityname = searchText.value;
+  var requestUrlfive = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=1c8e99a8b00221d888bd9d8829968388`;
+  fetch(requestUrlfive)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log("Fetch Response \n-------------");
+      console.log(data);
+    });
+}
+*/
 searchButton.addEventListener("click", searchCity);
