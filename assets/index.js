@@ -62,6 +62,19 @@ searchCity = function () {
         .then(function (data) {
           console.log("Fetch Response \n-------------");
           console.log(data);
+          //Current Day date
+          document.getElementById("today").innerText =
+            "Date:" + [data.list[0]] + " " + "2022";
+          console.log([data.list[0]]);
+          // 1/5 future weather
+          /*       document.getElementById("T-1").innerText =
+        "Temp:" + data.main.temp + " " + "F°";
+      //document.getElementById("W-1").innerText = "Wind:" + data.main;
+      document.getElementById("W-1").innerText =
+        "Wind:" + data.wind.speed + "MPH";
+      document.getElementById("H-1").innerText =
+        "Humidity:" + data.main.humidity + "%";
+        */
 
           // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
         });
