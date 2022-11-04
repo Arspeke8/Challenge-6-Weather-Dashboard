@@ -48,25 +48,25 @@ searchCity = function () {
         "Humidity:" + data.main.humidity + "%";
       console.log(data.coord.lat);
       console.log(data.coord.lon);
+      const lat = data.coord.lat;
+      const lon = data.coord.lon;
+      console.log(lat);
+      console.log(lon);
+      const requestUrlfive = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+      console.log(requestUrlfive);
+
+      fetch(requestUrlfive)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log("Fetch Response \n-------------");
+          console.log(data);
+
+          // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
+        });
     });
 };
-const lat = data.coord.lat;
-const lon = data.coord.lon;
-console.log(lat);
-console.log(lon);
-const requestUrlfive = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
-console.log(requestUrlfive);
-
-fetch(requestUrlfive)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log("Fetch Response \n-------------");
-    console.log(data);
-
-    // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
-  });
 
 /*function fiveCity() {
   var fiveText = document.getElementById("user-input");
