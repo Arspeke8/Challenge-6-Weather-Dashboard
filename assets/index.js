@@ -102,67 +102,27 @@ searchCity = function () {
           document.getElementById("H-6").innerText =
             "Humidity:" + [data.list[4].main.humidity] + "%";
 
-          //from index 0 get date from data.list.dt_txt and display current date to HTML
+          // saved the value of var cityName to the local storage and then display all to the page
+          localStorage.setItem("cityName", cityName);
 
-          //   document.getElementById("today").innerText =
-          //  "Date:" + data.list.dt_txt;
-          // document.getElementById("today").innerText =
-          //   "Date:" + [data.list[0].dt_txt] + " " + "2022";
+          JSON.parse(localStorage.getItem("cityName")) || [];
 
-          // 1/5 future weather
-          /*       document.getElementById("T-1").innerText =
-        "Temp:" + data.main.temp + " " + "F°";
-      //document.getElementById("W-1").innerText = "Wind:" + data.main;
-      document.getElementById("W-1").innerText =
-        "Wind:" + data.wind.speed + "MPH";
-      document.getElementById("H-1").innerText =
-        "Humidity:" + data.main.humidity + "%";
-        */
+          localStorage.setItem("cityName", JSON.stringify(searchHistory));
+          var searchHistory =
+            JSON.parse(localStorage.getItem("searchHistory")) || [];
+          var searchHistoryList = document.getElementById("search-history");
+          searchHistoryList.innerHTML = "";
+          for (var i = 0; i < searchHistory.length; i++) {
+            var li = document.createElement("li");
+            li.innerText = searchHistory[i];
+            searchHistoryList.appendChild(li);
+          }
 
           // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
         });
     });
 };
 
-/*function fiveCity() {
-  var fiveText = document.getElementById("user-input");
-  var fiveCityname = searchText.value;
-  var requestUrlfive = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=1c8e99a8b00221d888bd9d8829968388`;
-  fetch(requestUrlfive)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log("Fetch Response \n-------------");
-      console.log(data);
-    });
-}
-*/
 searchButton.addEventListener("click", searchCity);
 
-// var searchText save it to local storage and display it on the page column below the search bar in html column id = cityName
-
-// 1. Create a variable to save the search text to local storage
-// 2. Create a variable to display the search text on the page
-// 3. Create a function to save the search text to local storage
-// 4. Create a function to display the search text on the page
-var savedSearch = document.getElementById("saved-search");
-var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-console.log(searchHistory);
-var searchHistory = [];
-function saveSearch() {
-  var searchText = document.getElementById("user-input").value;
-  searchHistory.push(searchText);
-  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-}
-function displaySearch() {
-  var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  for (var i = 0; i < searchHistory.length; i++) {
-    var searchHistory = document.createElement("li");
-    searchHistory.textContent = searchHistory[i];
-    savedSearch.appendChild(searchHistory);
-  }
-}
-displaySearch();
-searchButton.addEventListener("click", saveSearch);
-searchButton.addEventListener("click", displaySearch);
+// var cityName save it to local storage
