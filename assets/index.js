@@ -22,7 +22,7 @@ Geocoding to convert city name into lat and Lon
 https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=1c8e99a8b00221d888bd9d8829968388
 
 */
-var CityName = "";
+var cityName = [];
 var APIKey = "1c8e99a8b00221d888bd9d8829968388";
 var requestUrl =
   "https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial";
@@ -30,8 +30,8 @@ var searchButton = document.getElementById("search-button");
 
 searchCity = function () {
   var searchText = document.getElementById("user-input");
-  var cityName = searchText.value;
-  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+  var currentCity = searchText.value;
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -101,22 +101,25 @@ searchCity = function () {
             "Wind:" + [data.list[4].wind.speed] + "MPH";
           document.getElementById("H-6").innerText =
             "Humidity:" + [data.list[4].main.humidity] + "%";
+          //saves currentCity to cityName array global variable
+          cityName.push(currentCity);
+          console.log(cityName);
+          //saves cityName array to local storage
+          localStorage.setItem("cityName", JSON.stringify(cityName));
+          //need array cityName to be displayed in html ("search-history")
+          // need array cityName to be displayed in html ("search-history") in a list one after another
 
-          // saved the value of var cityName to the local storage and then display all to the page
-          localStorage.setItem("cityName", cityName);
-
-          JSON.parse(localStorage.getItem("cityName")) || [];
-
-          localStorage.setItem("cityName", JSON.stringify(searchHistory));
-          var searchHistory =
-            JSON.parse(localStorage.getItem("searchHistory")) || [];
-          var searchHistoryList = document.getElementById("search-history");
-          searchHistoryList.innerHTML = "";
-          for (var i = 0; i < searchHistory.length; i++) {
-            var li = document.createElement("li");
-            li.innerText = searchHistory[i];
-            searchHistoryList.appendChild(li);
-          }
+          var list = document.createElement("li");
+          list.innerText = cityName;
+          document.getElementById("search-history").appendChild(list);
+          document
+            .getElementById("search-history")
+            .addEventListener("click", function () {
+              console.log("clicked");
+              console.log(cityName);
+              // make the array of cityName a list
+            });
+          // make array of cityName clickable
 
           // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
         });
