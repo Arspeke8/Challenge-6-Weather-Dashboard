@@ -139,3 +139,30 @@ searchCity = function () {
 }
 */
 searchButton.addEventListener("click", searchCity);
+
+// var searchText save it to local storage and display it on the page column below the search bar in html column id = cityName
+
+// 1. Create a variable to save the search text to local storage
+// 2. Create a variable to display the search text on the page
+// 3. Create a function to save the search text to local storage
+// 4. Create a function to display the search text on the page
+var savedSearch = document.getElementById("saved-search");
+var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+console.log(searchHistory);
+var searchHistory = [];
+function saveSearch() {
+  var searchText = document.getElementById("user-input").value;
+  searchHistory.push(searchText);
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
+function displaySearch() {
+  var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  for (var i = 0; i < searchHistory.length; i++) {
+    var searchHistory = document.createElement("li");
+    searchHistory.textContent = searchHistory[i];
+    savedSearch.appendChild(searchHistory);
+  }
+}
+displaySearch();
+searchButton.addEventListener("click", saveSearch);
+searchButton.addEventListener("click", displaySearch);
