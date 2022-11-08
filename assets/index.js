@@ -110,16 +110,10 @@ searchCity = function () {
           // need array cityName to be displayed in html ("search-history") in a list one after another
 
           var list = document.createElement("li");
-          list.innerText = cityName;
-          document.getElementById("search-history").appendChild(list);
-          document
-            .getElementById("search-history")
-            .addEventListener("click", function () {
-              console.log("clicked");
-              console.log(cityName);
-              // make the array of cityName a list
-            });
-          // make array of cityName clickable
+          for (var i = 0; i < cityName.length; i++) {
+            list.innerHTML = cityName[i];
+            document.getElementById("search-history").appendChild(list);
+          }
 
           // TODO: Instead of alerting, you can modify existing HTML with getElementbyID or querySelector... For example, document.getElementByID("something").innerText = data.main.temp;
         });
