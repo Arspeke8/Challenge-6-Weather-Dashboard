@@ -123,33 +123,33 @@ searchCity = function () {
 searchButton.addEventListener("click", searchCity);
 
 cityClicked = function () {
-  theCity = cityName;
+  let theCity = cityName;
   for (var i = 0; i < cityName.length; i++) {
     console.log(theCity);
   }
 
-  if (i >= 0) {
-    console.log("theCity");
+  if (i == 0) {
+    console.log(theCity);
   }
 
-  if (i >= 1) {
-    console.log("theCity");
+  if (i == 1) {
+    console.log(theCity);
   }
 
-  if (i >= 2) {
-    console.log("theCity");
+  if (i == 2) {
+    console.log(theCity);
   }
 
-  if (i >= 3) {
-    console.log("theCity");
+  if (i == 3) {
+    console.log(theCity);
   }
 
-  if (i >= 4) {
-    console.log("theCity");
+  if (i == 4) {
+    console.log(theCity);
   }
 
-  if (i >= 5) {
-    console.log("theCity");
+  if (i == 5) {
+    console.log(theCity);
   }
 
   console.log(theCity);
