@@ -122,105 +122,82 @@ searchCity = function () {
 };
 searchButton.addEventListener("click", searchCity);
 
-cityClicked = function () {
-  for (var i = 0; i < cityName.length; i++) {
-    let theCity = cityName[i];
-    console.log(theCity);
+cityClicked = function (event) {
+  console.log(event.target.textContent);
+  var theCity = event.target.textContent;
 
-    if (cityName === 0) {
-      console.log(theCity);
-    }
-    if (cityName === 1) {
-      console.log(theCity);
-    }
-    if (cityName === 2) {
-      console.log(theCity);
-    }
-    if (cityName === 3) {
-      console.log(theCity);
-    }
-    if (cityName === 4) {
-      console.log(theCity);
-    }
-    if (cityName === 5) {
-      console.log(theCity);
-    } else {
-      console.log("nope");
-    }
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${theCity}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
 
-    var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${theCity}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log("Fetch Response \n-------------");
+      console.log(data);
+      document.getElementById("T-1").innerText =
+        "Temp:" + data.main.temp + " " + "F°";
+      //document.getElementById("W-1").innerText = "Wind:" + data.main;
+      document.getElementById("W-1").innerText =
+        "Wind:" + data.wind.speed + "MPH";
+      document.getElementById("H-1").innerText =
+        "Humidity:" + data.main.humidity + "%";
+      console.log(data.coord.lat);
+      console.log(data.coord.lon);
+      const lat = data.coord.lat;
+      const lon = data.coord.lon;
+      console.log(lat);
+      console.log(lon);
+      const requestUrlfive = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
+      console.log(requestUrlfive);
 
-    fetch(requestUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log("Fetch Response \n-------------");
-        console.log(data);
-        document.getElementById("T-1").innerText =
-          "Temp:" + data.main.temp + " " + "F°";
-        //document.getElementById("W-1").innerText = "Wind:" + data.main;
-        document.getElementById("W-1").innerText =
-          "Wind:" + data.wind.speed + "MPH";
-        document.getElementById("H-1").innerText =
-          "Humidity:" + data.main.humidity + "%";
-        console.log(data.coord.lat);
-        console.log(data.coord.lon);
-        const lat = data.coord.lat;
-        const lon = data.coord.lon;
-        console.log(lat);
-        console.log(lon);
-        const requestUrlfive = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1c8e99a8b00221d888bd9d8829968388&units=imperial`;
-        console.log(requestUrlfive);
-
-        fetch(requestUrlfive)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            console.log("Fetch Response \n-------------");
-            console.log(data);
-            //Current Day date
-            document.getElementById("today").innerText =
-              "Date:" + [data.list[0].dx_txt] + " " + "2022";
-            console.log([data.list[0]]);
-            //Day 1
-            document.getElementById("T-2").innerText =
-              "Temp:" + [data.list[0].main.temp] + " " + "F°";
-            document.getElementById("W-2").innerText =
-              "Wind:" + [data.list[0].wind.speed] + "MPH";
-            document.getElementById("H-2").innerText =
-              "Humidity:" + [data.list[0].main.humidity] + "%";
-            //Day 2
-            document.getElementById("T-3").innerText =
-              "Temp:" + [data.list[1].main.temp] + " " + "F°";
-            document.getElementById("W-3").innerText =
-              "Wind:" + [data.list[1].wind.speed] + "MPH";
-            document.getElementById("H-3").innerText =
-              "Humidity:" + [data.list[1].main.humidity] + "%";
-            //Day 3
-            document.getElementById("T-4").innerText =
-              "Temp:" + [data.list[2].main.temp] + " " + "F°";
-            document.getElementById("W-4").innerText =
-              "Wind:" + [data.list[2].wind.speed] + "MPH";
-            document.getElementById("H-4").innerText =
-              "Humidity:" + [data.list[2].main.humidity] + "%";
-            //Day 4
-            document.getElementById("T-5").innerText =
-              "Temp:" + [data.list[3].main.temp] + " " + "F°";
-            document.getElementById("W-5").innerText =
-              "Wind:" + [data.list[3].wind.speed] + "MPH";
-            document.getElementById("H-5").innerText =
-              "Humidity:" + [data.list[3].main.humidity] + "%";
-            //Day 5
-            document.getElementById("T-6").innerText =
-              "Temp:" + [data.list[4].main.temp] + " " + "F°";
-            document.getElementById("W-6").innerText =
-              "Wind:" + [data.list[4].wind.speed] + "MPH";
-            document.getElementById("H-6").innerText =
-              "Humidity:" + [data.list[4].main.humidity] + "%";
-          });
-      });
-  }
+      fetch(requestUrlfive)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log("Fetch Response \n-------------");
+          console.log(data);
+          //Current Day date
+          document.getElementById("today").innerText =
+            "Date:" + [data.list[0].dx_txt] + " " + "2022";
+          console.log([data.list[0]]);
+          //Day 1
+          document.getElementById("T-2").innerText =
+            "Temp:" + [data.list[0].main.temp] + " " + "F°";
+          document.getElementById("W-2").innerText =
+            "Wind:" + [data.list[0].wind.speed] + "MPH";
+          document.getElementById("H-2").innerText =
+            "Humidity:" + [data.list[0].main.humidity] + "%";
+          //Day 2
+          document.getElementById("T-3").innerText =
+            "Temp:" + [data.list[1].main.temp] + " " + "F°";
+          document.getElementById("W-3").innerText =
+            "Wind:" + [data.list[1].wind.speed] + "MPH";
+          document.getElementById("H-3").innerText =
+            "Humidity:" + [data.list[1].main.humidity] + "%";
+          //Day 3
+          document.getElementById("T-4").innerText =
+            "Temp:" + [data.list[2].main.temp] + " " + "F°";
+          document.getElementById("W-4").innerText =
+            "Wind:" + [data.list[2].wind.speed] + "MPH";
+          document.getElementById("H-4").innerText =
+            "Humidity:" + [data.list[2].main.humidity] + "%";
+          //Day 4
+          document.getElementById("T-5").innerText =
+            "Temp:" + [data.list[3].main.temp] + " " + "F°";
+          document.getElementById("W-5").innerText =
+            "Wind:" + [data.list[3].wind.speed] + "MPH";
+          document.getElementById("H-5").innerText =
+            "Humidity:" + [data.list[3].main.humidity] + "%";
+          //Day 5
+          document.getElementById("T-6").innerText =
+            "Temp:" + [data.list[4].main.temp] + " " + "F°";
+          document.getElementById("W-6").innerText =
+            "Wind:" + [data.list[4].wind.speed] + "MPH";
+          document.getElementById("H-6").innerText =
+            "Humidity:" + [data.list[4].main.humidity] + "%";
+        });
+    });
 };
 searchInput.addEventListener("click", cityClicked);
