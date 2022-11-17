@@ -123,11 +123,26 @@ searchCity = function () {
 searchButton.addEventListener("click", searchCity);
 
 cityClicked = function () {
-  let theCity = cityName;
   for (var i = 0; i < cityName.length; i++) {
+    let theCity = cityName[i];
     console.log(theCity);
 
-    if (cityName === "click") {
+    if (cityName === 0) {
+      console.log(theCity);
+    }
+    if (cityName === 1) {
+      console.log(theCity);
+    }
+    if (cityName === 2) {
+      console.log(theCity);
+    }
+    if (cityName === 3) {
+      console.log(theCity);
+    }
+    if (cityName === 4) {
+      console.log(theCity);
+    }
+    if (cityName === 5) {
       console.log(theCity);
     } else {
       console.log("nope");
