@@ -8,7 +8,7 @@
 
 # Learned how to fetch an API and display the data on the page
 
-# ![Portfolio Ryan Dong.](./Assets/_Users_ryandong_Desktop_Coding-Bootcamp_Challenges_Challenge-3-8.29.22_Challenge-3-password-generator_index.html.png)
+# ![Portfolio Ryan Dong.](/Challenge-6-Weather-Dashboard/assets/weatherPic.png)
 
 # Ryan Dong
 
