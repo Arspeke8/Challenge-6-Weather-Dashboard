@@ -8,7 +8,7 @@
 
 # Learned how to fetch an API and display the data on the page
 
-# ![Portfolio Ryan Dong.](/Challenge-6-Weather-Dashboard/assets/weatherPic.png)
+# ![Weather Challenge.](/Challenge-6-Weather-Dashboard/assets/weatherPic.png)
 
 # Ryan Dong
 
